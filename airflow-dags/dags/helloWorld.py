@@ -2,10 +2,12 @@ from datetime import datetime
 from airflow import DAG
 from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.python_operator import PythonOperator
+import requests
 
 
 def print_hello():
     print('Hello world from first Airflow DAG!')
+    print(requests.get('https://www.google.com').text)
 
 dag = DAG('hello_world', description='Hello World DAG',
           schedule_interval='0 12 * * *',
